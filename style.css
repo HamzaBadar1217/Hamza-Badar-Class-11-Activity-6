@@ -1,12 +1,9 @@
 .container-fluid {
-  background-image: url(./Images/mern.webp);
-  min-height: 100vh;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #DEDDD0;
 }
 
-h1{
-    font-size: 1.6em;
+h1 {
+  font-size: 1.6em;
 }
 
 .fitContent {
@@ -82,9 +79,28 @@ table tr:first-child td:last-child {
   border-top-right-radius: 20px;
 }
 
+.pagination > li.active > a {
+  background-color: #009879;
+  border: 1px solid #009879;
+  color: #fff;
+}
 
-.pagination>li.active>a {
-    background-color: #009879 ;
-    border: 1px solid #009879;
-    color: #fff;
-  }
+.countdown {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 50px;
+}
+
+.countdown span {
+  color: #009879;
+  font-size: 1.5em;
+  font-weight: 800;
+}
+
+.footer-col {
+    background-color: #009879;
+    padding: 15px 30px;
+    border-radius: 15px;
+    width: 73.7%;
+}

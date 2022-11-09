@@ -13,7 +13,14 @@
 <body style="overflow-x: hidden;">
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row first-row">
+            <div class="col-12 vh-100 d-flex justify-content-center align-items-center">
+                <div class="countdown text-light">
+                    API will be called automatically in <span class="timeLeft"> 10 </span> seconds.
+                </div>
+            </div>
+        </div>
+        <div class="row d-none table-row">
             <div class="col-12 ">
                 <h1 class="text-light text-center mt-5 mb-3">Data from API To Table Using Fetch</h1>
                 <div class="fitContent mx-auto mb-5">
@@ -32,8 +39,8 @@
                     </table>
                 </div>
             </div>
-            <div class="col-8 mx-auto d-flex justify-content-between">
-                <p class="text-light">
+            <div class="col-12 mx-auto d-flex justify-content-between footer-col mb-4 shadow">
+                <p class="text-light mt-2">
                     Showing results <span id="displayLengthPerPage">10</span> of <span id="totalLength"></span>
                 </p>
 

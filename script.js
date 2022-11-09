@@ -4,70 +4,79 @@ const tableFunc = async () => {
   return json;
 };
 
+const timer = document.querySelector(".timeLeft");
+const firstRow = document.querySelector(".first-row");
+const tableRow = document.querySelector(".table-row");
+
 const tableBody = document.querySelector("#tableBody");
 const pagination = document.querySelector("#pagination");
 const dropDown = document.querySelector("#dropDown");
+
 const displayLength = document.querySelector("#displayLengthPerPage");
 const totalLength = document.querySelector("#totalLength");
 
 // console.log(dropDown);
 
 const callingFunc = tableFunc();
-callingFunc.then((data) => {
-  //   console.log(data);
-  // console.log(typeof dropDown)
+setTimeout(() => {
+  callingFunc.then((data) => {
+    //   console.log(data);
+    // console.log(typeof dropDown)
 
-  let item = [];
-  let paginationNumber = [];
-  let paginationDropDown = [];
+    let item = [];
+    let paginationNumber = [];
+    let paginationDropDown = [];
 
-  data.forEach((element, index) => {
-    item += `<tr class="tableRow">  
-        <td>${index + 1}</td>  
-        <td>${element.name}</td>  
-        <td>${element.email}</td>  
-        <td>${element.address.street}, ${element.address.city}, ${
-      element.address.zipcode
-    }</td>  
-    </tr> `;
+    data.forEach((element, index) => {
+      item += `<tr class="tableRow">  
+          <td>${index + 1}</td>  
+          <td>${element.name}</td>  
+          <td>${element.email}</td>  
+          <td>${element.address.street}, ${element.address.city}, ${
+        element.address.zipcode
+      }</td>  
+      </tr> `;
 
-    if (
-      index == parseInt(data.length) - 1 ||
-      index == parseInt(data.length / 2) - 1 ||
-      index == parseInt(data.length / 2 / 2) - 1
-    ) {
-      paginationDropDown += `
-    <option value=${index + 1} class= option-${index + 1}>${index + 1}</option>
-    `;
-    }
+      if (
+        index == parseInt(data.length) - 1 ||
+        index == parseInt(data.length / 2) - 1 ||
+        index == parseInt(data.length / 2 / 2) - 1
+      ) {
+        paginationDropDown += `
+      <option value=${index + 1} class= option-${index + 1}>${
+          index + 1
+        }</option>
+      `;
+      }
 
-    paginationNumber += `
-    <li class="page-item" onclick="tableRowFunc(pagination.children[${
-      index + 1
-    }].children[0].innerHTML)"><a class="page-link">${index + 1}</a></li>
-    `;
+      paginationNumber += `
+      <li class="page-item" onclick="tableRowFunc(pagination.children[${
+        index + 1
+      }].children[0].innerHTML)"><a class="page-link">${index + 1}</a></li>
+      `;
+    });
+
+    tableBody.innerHTML = item;
+    dropDown.innerHTML = `
+                      <option class='me-3' style='font-size='0.776em; color: #4ca392;' disabled>Open this select menu</option>
+                      ${paginationDropDown}`;
+    pagination.innerHTML = `<li class="page-item" onclick="prev()">
+                              <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+                            ${paginationNumber}
+                            <li class="page-item" onclick="next()">
+                              <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>`;
+
+    dropDown.lastElementChild.setAttribute("selected", true);
+
+    totalLength.innerText = tableBody.childElementCount;
   });
-
-  tableBody.innerHTML = item;
-  dropDown.innerHTML = `
-                    <option class='me-3' style='font-size='0.776em; color: #4ca392;' disabled>Open this select menu</option>
-                    ${paginationDropDown}`;
-  pagination.innerHTML = `<li class="page-item" onclick="prev()">
-                            <a class="page-link" href="#" aria-label="Previous">
-                              <span aria-hidden="true">&laquo;</span>
-                            </a>
-                          </li>
-                          ${paginationNumber}
-                          <li class="page-item" onclick="next()">
-                            <a class="page-link" href="#" aria-label="Next">
-                              <span aria-hidden="true">&raquo;</span>
-                            </a>
-                          </li>`;
-
-  dropDown.lastElementChild.setAttribute("selected", true);
-
-  totalLength.innerText = tableBody.childElementCount;
-});
+}, 10000);
 
 const myFunc = (value) => {
   displayLength.innerText = value;
@@ -194,3 +203,26 @@ const next = () => {
     tableRowFunc(pageValue + 1);
   }
 };
+
+let timerValue = 10;
+let opacityValue = 1;
+
+let timeInterval = setInterval(() => {
+  debugger;
+  timerValue -= 1;
+  timer.innerText = timerValue;
+
+  if (timerValue <= 0) {
+    clearInterval(timeInterval);
+    let opacityInterval = setInterval(() => {
+      opacityValue -= 0.1;
+      firstRow.style.opacity = opacityValue;
+
+      if (opacityValue <= 0) {
+        clearInterval(opacityInterval);
+        firstRow.style.display = "none";
+        tableRow.classList.remove('d-none')
+      }
+    }, 250);
+  }
+}, 1000);
