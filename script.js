@@ -76,6 +76,9 @@ setTimeout(() => {
 
     totalLength.innerText = tableBody.childElementCount;
   });
+  callingFunc.catch((error) => {
+    console.log(error)
+  });
 }, 10000);
 
 const myFunc = (value) => {
