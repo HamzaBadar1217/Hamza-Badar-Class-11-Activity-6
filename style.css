@@ -2,6 +2,14 @@
   background-color: #DEDDD0;
 }
 
+.table-row {
+    min-height: 100vh;
+}
+
+.footer-col {
+    height: fit-content;
+}
+
 h1 {
   font-size: 1.6em;
 }
@@ -66,6 +74,8 @@ tr:hover {
 
 .page-link:hover {
   background-color: #009879;
+  border: #009879;
+  outline: #009879;
   color: #f3f3f3;
 }
 
