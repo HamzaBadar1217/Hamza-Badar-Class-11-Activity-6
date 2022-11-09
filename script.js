@@ -7,6 +7,8 @@ const tableFunc = async () => {
 const tableBody = document.querySelector("#tableBody");
 const pagination = document.querySelector("#pagination");
 const dropDown = document.querySelector("#dropDown");
+const displayLength = document.querySelector("#displayLengthPerPage");
+const totalLength = document.querySelector("#totalLength");
 
 // console.log(dropDown);
 
@@ -50,26 +52,35 @@ callingFunc.then((data) => {
   dropDown.innerHTML = `
                     <option class='me-3' style='font-size='0.776em; color: #4ca392;' disabled>Open this select menu</option>
                     ${paginationDropDown}`;
-  pagination.innerHTML = `<li class="page-item">
+  pagination.innerHTML = `<li class="page-item" onclick="prev()">
                             <a class="page-link" href="#" aria-label="Previous">
                               <span aria-hidden="true">&laquo;</span>
                             </a>
                           </li>
                           ${paginationNumber}
-                          <li class="page-item">
+                          <li class="page-item" onclick="next()">
                             <a class="page-link" href="#" aria-label="Next">
                               <span aria-hidden="true">&raquo;</span>
                             </a>
                           </li>`;
 
   dropDown.lastElementChild.setAttribute("selected", true);
+
+  totalLength.innerText = tableBody.childElementCount;
 });
 
 const myFunc = (value) => {
+  displayLength.innerText = value;
   const tableRow = document.querySelectorAll(".tableRow");
   pagination.classList.remove("d-none");
 
-  for (i = 0; i < tableRow.length; i++) {
+  for (let i = 0; i < tableRow.length; i++) {
+    pagination.children[i].classList.remove("active");
+  }
+
+  pagination.children[1].classList.add("active");
+
+  for (let i = 0; i < tableRow.length; i++) {
     tableRow[i].classList.remove("d-none");
   }
 
@@ -116,10 +127,70 @@ const myFunc = (value) => {
 
 const tableRowFunc = (pageValue) => {
   const tableRow = document.querySelectorAll(".tableRow");
-    for(let i=0; i<pageValue; i++) {
-      tableRow.children[i].classList.add('d-none')
-      if (pageValue == 1) {
+  for (let i = 0; i < tableRow.length; i++) {
+    tableRow[i].classList.add("d-none");
+  }
 
-      } 
+  for (let i = 0; i <= tableRow.length; i++) {
+    pagination.children[i].classList.remove("active");
+  }
+
+  pagination.children[parseInt(pageValue)].classList.add("active");
+
+  tableRow.children;
+  let arr = [0];
+  let i = 1;
+  let value = parseInt(dropDown.value);
+
+  while (i <= tableRow.length / value) {
+    arr.push(value * i);
+    i++;
+  }
+
+  for (
+    let i = arr[parseInt(pageValue) - 1];
+    i < arr[parseInt(pageValue)];
+    i++
+  ) {
+    tableRow[i].classList.remove("d-none");
+  }
+};
+
+const prev = () => {
+  const tableRow = document.querySelectorAll(".tableRow");
+
+  let pageValue;
+  for (let i = 0; i <= tableRow.length; i++) {
+    if (pagination.children[i].classList.contains("active")) {
+      pageValue = parseInt(pagination.children[i].children[0].innerHTML);
     }
+  }
+
+  if (pageValue === 1) {
+    return;
+  } else {
+    tableRowFunc(pageValue - 1);
+  }
+};
+
+const next = () => {
+  const tableRow = document.querySelectorAll(".tableRow");
+
+  let pageValue;
+  for (let i = 0; i <= tableRow.length; i++) {
+    if (pagination.children[i].classList.contains("active")) {
+      pageValue = parseInt(pagination.children[i].children[0].innerHTML);
+    }
+  }
+
+  let lastElement =
+    parseInt(
+      pagination.children[pagination.children.length - 2].children[0].innerHTML
+    ) / parseInt(dropDown.value);
+
+  if (lastElement === pageValue) {
+    return;
+  } else {
+    tableRowFunc(pageValue + 1);
+  }
 };

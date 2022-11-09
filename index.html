@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 ">
-                <h1 class="text-light text-center mt-5 mb-3">Data from API To Table</h1>
+                <h1 class="text-light text-center mt-5 mb-3">Data from API To Table Using Fetch</h1>
                 <div class="fitContent mx-auto mb-5">
                     <table class="styled-table">
                         <thead>
@@ -32,14 +32,20 @@
                     </table>
                 </div>
             </div>
-            <div class="col-8 mx-auto d-flex justify-content-end">
-                <select id="dropDown" class="form-select" aria-label="Default select example" onchange ="myFunc(dropDown.value)">
+            <div class="col-8 mx-auto d-flex justify-content-between">
+                <p class="text-light">
+                    Showing results <span id="displayLengthPerPage">10</span> of <span id="totalLength"></span>
+                </p>
+
+                <div class="d-flex justify-content-end">
+                    <select id="dropDown" class="form-select" aria-label="Default select example" onchange ="myFunc(dropDown.value)">
                     
-                  </select>
-                <nav aria-label="Page navigation example" class="ms-3">
-                    <ul class="pagination d-none" id="pagination">
-                      
-                </nav>
+                    </select>
+                  <nav aria-label="Page navigation example" class="ms-3">
+                      <ul class="pagination d-none" id="pagination">
+                        
+                  </nav>
+                </div>
             </div>
         </div>
     </div>
