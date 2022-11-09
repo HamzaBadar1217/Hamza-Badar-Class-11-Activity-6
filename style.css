@@ -1,13 +1,11 @@
+body {
+  background-image: url("./Images/JavaScript.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .container-fluid {
-  background-color: #DEDDD0;
-}
-
-.table-row {
-    min-height: 100vh;
-}
-
-.footer-col {
-    height: fit-content;
+    width: fit-content;
 }
 
 h1 {
@@ -109,8 +107,12 @@ table tr:first-child td:last-child {
 }
 
 .footer-col {
-    background-color: #009879;
-    padding: 15px 30px;
-    border-radius: 15px;
-    width: 73.7%;
+  background-color: #009879;
+  padding: 15px 30px;
+  border-radius: 15px;
+  width: 1000px;
+}
+
+.countdown {
+  color: rgb(187, 187, 187);
 }
